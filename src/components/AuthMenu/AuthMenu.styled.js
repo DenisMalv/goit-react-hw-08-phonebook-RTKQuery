@@ -50,6 +50,10 @@ export const RegisterLink = styled(NavLink)`
       position: relative;
     }
   }
+  &.active {
+    color: #00cdd5;
+    pointer-events: none;
+  }
 `;
 
 export const LoginLink = styled(NavLink)`
@@ -96,5 +100,9 @@ export const LoginLink = styled(NavLink)`
       position: relative;
       //   color: black;
     }
+  }
+  &.active {
+    color: #00cdd5;
+    pointer-events: none;
   }
 `;
