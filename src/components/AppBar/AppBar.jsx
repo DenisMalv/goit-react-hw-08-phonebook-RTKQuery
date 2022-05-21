@@ -3,7 +3,7 @@ import {
   NavContacts,
   Navigation,
   AppBarContainer,
-  Helper,
+  // Helper,
 } from './AppBar.styled';
 import { useSelector } from 'react-redux';
 import { getToken } from 'redux/tokenSlice/tokenSlice';
