@@ -23,14 +23,14 @@ export const AppBar = () => {
             <span>Contacts</span>
           </NavContacts>
         )}
-        <Helper>
+        {/* <Helper>
           <p>Test1 Acc: qwertyuiqq@gmail.com</p>
           <p>Test1 Pass : 1234567890qq</p>
         </Helper>
         <Helper>
           <p>Test2 Acc : zxcvbnmqq@mail.com</p>
           <p>Test2 Pass : zxcvbnmqq</p>
-        </Helper>
+        </Helper> */}
       </Navigation>
       {isLogin && <UserMenu />}
       {!isLogin && <AuthMenu />}
