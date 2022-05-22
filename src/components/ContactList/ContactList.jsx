@@ -4,7 +4,7 @@ import ContactItem from 'components/ContactItem/ContactItem';
 import Loader from 'components/Loader/Loader';
 import { LoaderBackground } from 'components/Loader/LoaderBackground.styled';
 
-import { getFilterValue } from 'redux/contactsSlice/contactsSlice';
+import { getFilterValue } from 'redux/filterSlice/filterSlice';
 import { useSelector } from 'react-redux';
 
 import { useGetContactsRTKQuery } from 'redux/RTKContactsApi/ContactsApi';

@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { contactsSliceReducer } from './contactsSlice/contactsSlice';
+import { contactsSliceReducer } from './filterSlice/filterSlice';
 import { contactsApi } from './RTKContactsApi/ContactsApi';
 import { AuthApi } from './RTKAuthApi/AuthApi';
 import { persistedUserAuthReducer } from './tokenSlice/tokenSlice';

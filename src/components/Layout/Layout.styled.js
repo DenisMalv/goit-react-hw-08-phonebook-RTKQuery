@@ -5,7 +5,8 @@ export const Header = styled.header`
   display: block;
   background: linear-gradient(#003a3efc, #7ce6f42b);
   min-height: 50px;
-  margin-bottom: 20px;
+  // margin-bottom: 20px;
+  z-index: -2;
 `;
 
 export const Homepage = styled(Link)`
@@ -79,4 +80,5 @@ export const MainContent = styled.main`
   );
   min-height: 84.3vh;
   font-family: Roboto;
+  padding:20px 0
 `;
