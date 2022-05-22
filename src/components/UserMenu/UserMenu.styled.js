@@ -42,7 +42,7 @@ export const LogOutButton = styled.button`
     top: 0;
     height: 0;
     width: 100%;
-    z-index: 0;
+    z-index: -1;
     color: white;
     // background: linear-gradient(180deg, #ff3000, #ed0200, #ff096c, #d50082);
     background: linear-gradient(

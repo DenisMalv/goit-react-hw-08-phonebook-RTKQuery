@@ -13,14 +13,24 @@ export const UserMenu = () => {
   const [logOutRTK] = useLogOutRTKMutation();
 
   const token = useSelector(getToken);
-  const { data = [], isSuccess } = useGetUserRTKQuery({ token });
+  const { data = [], isError } = useGetUserRTKQuery({ token });
 
   const handleLogOut = async () => {
-    await logOutRTK(token);
-    if (isSuccess) {
-      dispatch(isToken({ token: null }));
-      navigate('/login');
+    try {
+      const ress = await logOutRTK(token);
+      if (ress) {
+        dispatch(isToken({ token: null }));
+        navigate('/login');
+      }
+    } catch (error) {
+      console.log('error you are is not login');
+      isError(error);
     }
+
+    // if (isSuccess) {
+    //   dispatch(isToken({ token: null }));
+    //   navigate('/login');
+    // }
   };
 
   return (
