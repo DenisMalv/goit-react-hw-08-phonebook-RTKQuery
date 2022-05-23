@@ -7,11 +7,21 @@ export const RegisterForm = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [registerRTK, registerApi] = useRegisterRTKMutation();
+  const [error = false, setError] = useState('');
+  const [registerRTK, { isError, isSuccess }] = useRegisterRTKMutation();
 
-  if (registerApi.isSuccess) {
-    console.log('register completed');
-  }
+  // if (isSuccess) {
+  //   console.log('register completed', isSuccess);
+  // }
+  // if (isError) {
+  //   console.log('register not completed', isError);
+  // }
+  // if (error?.data?.keyValue) {
+  //   console.log(`error email already exist`, error.data.keyValue.email);
+  // }
+  // if (error?.data?.message) {
+  //   console.log(`error password`, error.data.message);
+  // }
 
   const handleImputChange = event => {
     const { name, value } = event.currentTarget;
@@ -32,12 +42,11 @@ export const RegisterForm = () => {
     }
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
     const user = { name, email, password };
-    console.log('newUser RegisterForm', user);
-    registerRTK(user);
-
+    const resposnce = await registerRTK(user);
+    resposnce.error && setError(resposnce.error);
     reset();
   };
 
@@ -48,37 +57,59 @@ export const RegisterForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={css.contactForm}>
-      <label className={css.contactForm__label}>
-        <span>name</span>
-        <input
-          type="name"
-          name="name"
-          value={name}
-          onChange={handleImputChange}
-        />
-      </label>
-      <label className={css.contactForm__label}>
-        <span>email</span>
-        <input
-          type="email"
-          name="email"
-          value={email}
-          onChange={handleImputChange}
-        />
-      </label>
-      <label className={css.contactForm__label}>
-        <span>password</span>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handleImputChange}
-        />
-      </label>
-      <button type="submit" className={css.contactForm__button}>
-        Register
-      </button>
-    </form>
+    <>
+      <form onSubmit={handleSubmit} className={css.contactForm}>
+        <label className={css.contactForm__label}>
+          <span>name</span>
+          <input
+            type="name"
+            name="name"
+            value={name}
+            onChange={handleImputChange}
+          />
+        </label>
+        <label className={css.contactForm__label}>
+          <span>email</span>
+          <input
+            type="email"
+            name="email"
+            value={email}
+            onChange={handleImputChange}
+          />
+        </label>
+        <label className={css.contactForm__label}>
+          <span>password</span>
+          <input
+            type="password"
+            name="password"
+            value={password}
+            onChange={handleImputChange}
+          />
+        </label>
+        <button type="submit" className={css.contactForm__button}>
+          Register
+        </button>
+      </form>
+      {isSuccess && (
+        <p style={{ fontFamily: `Roboto`, fontSize: 24 }}>
+          Registration succeess :)
+        </p>
+      )}
+      {isError && (
+        <p style={{ fontFamily: `Roboto`, fontSize: 24 }}>
+          Registration not succeess :(
+        </p>
+      )}
+      {error?.data?.keyValue && (
+        <p style={{ fontFamily: `Roboto`, fontSize: 24 }}>
+          this email is already registed :(
+        </p>
+      )}
+      {error?.data?.message && (
+        <p style={{ fontFamily: `Roboto`, fontSize: 24 }}>
+          {error.data.message}
+        </p>
+      )}
+    </>
   );
 };

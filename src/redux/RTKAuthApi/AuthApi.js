@@ -19,7 +19,6 @@ export const AuthApi = createApi({
       query: body => ({
         url: '/users/signup',
         method: 'POST',
-        // header:{Authorization:'Bearer ${token}',
         body,
       }),
       invalidatesTags: ['userAuth'],
