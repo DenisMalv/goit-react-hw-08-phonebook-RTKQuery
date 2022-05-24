@@ -28,7 +28,6 @@ export const LoginForm = () => {
       if (ress.data) {
         navigate('/contacts');
         dispatch(isToken({ token: ress.data.token }));
-        localStorage.setItem('tokenhz', ress.data.token);
       }
     } catch (error) {
       isError(error);
