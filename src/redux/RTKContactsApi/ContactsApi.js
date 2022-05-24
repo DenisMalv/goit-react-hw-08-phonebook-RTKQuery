@@ -5,13 +5,20 @@ export const contactsApi = createApi({
   tagTypes: ['Contacts', 'filter'],
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://connections-api.herokuapp.com',
+    prepareHeaders: (headers, { getState }) => {
+      const token = getState().token.token;
+      if (token) {
+        headers.set('authorization', `Bearer ${token}`);
+      }
+      return headers;
+    },
   }),
   endpoints: build => ({
     getContactsRTK: build.query({
       query: token => ({
         url: '/contacts',
         method: 'GET',
-        headers: { Authorization: `Bearer ${token}` },
+        // headers: { Authorization: `Bearer ${token}` },
       }),
       providesTags: ['Contacts', 'filter'],
     }),
@@ -19,7 +26,7 @@ export const contactsApi = createApi({
       query: body => ({
         url: '/contacts',
         method: 'POST',
-        headers: { Authorization: `Bearer ${body.token}` },
+        // headers: { Authorization: `Bearer ${body.token}` },
         body: body.contact,
       }),
       invalidatesTags: ['Contacts'],
@@ -28,7 +35,7 @@ export const contactsApi = createApi({
       query: body => ({
         url: `/contacts/${body.id}`,
         method: 'DELETE',
-        headers: { Authorization: `Bearer ${body.token}` },
+        // headers: { Authorization: `Bearer ${body.token}` },
       }),
       invalidatesTags: ['Contacts'],
     }),

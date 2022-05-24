@@ -12,6 +12,7 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
+import { setupListeners } from '@reduxjs/toolkit/query';
 
 // store
 export const store = configureStore({
@@ -33,3 +34,5 @@ export const store = configureStore({
 });
 
 export const persistor = persistStore(store);
+
+setupListeners(store.dispatch);

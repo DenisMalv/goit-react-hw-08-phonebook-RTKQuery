@@ -9,7 +9,7 @@ export const RegisterForm = () => {
   const [password, setPassword] = useState('');
   const [error = false, setError] = useState('');
   const [registerRTK, { isError, isSuccess }] = useRegisterRTKMutation();
-
+  console.log(useRegisterRTKMutation());
   // if (isSuccess) {
   //   console.log('register completed', isSuccess);
   // }

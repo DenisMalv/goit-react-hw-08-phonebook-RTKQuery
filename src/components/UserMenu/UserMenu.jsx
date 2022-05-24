@@ -6,31 +6,32 @@ import {
   useLogOutRTKMutation,
 } from 'redux/RTKAuthApi/AuthApi';
 import { getToken, isToken } from 'redux/tokenSlice/tokenSlice';
+import { useEffect } from 'react';
 
 export const UserMenu = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [logOutRTK] = useLogOutRTKMutation();
+  const [logOutRTK, { isSuccess }] = useLogOutRTKMutation();
 
   const token = useSelector(getToken);
-  const { data = [], isError } = useGetUserRTKQuery({ token });
+  console.log(token);
+  const { data = [], isError } = useGetUserRTKQuery(
+    { token },
+    { refetchOnFocus: true }
+  );
+  console.log(useGetUserRTKQuery());
+  console.log('error', isError);
+  useEffect(() => {
+    if (isSuccess || isError) {
+      console.log('logout success', isSuccess);
+      // console.log('logout error', error);
+      dispatch(isToken({ token: null }));
+      navigate('/');
+    }
+  }, [dispatch, isError, isSuccess, navigate]);
 
   const handleLogOut = async () => {
-    try {
-      const ress = await logOutRTK(token);
-      if (ress) {
-        dispatch(isToken({ token: null }));
-        navigate('/login');
-      }
-    } catch (error) {
-      console.log('error you are is not login');
-      isError(error);
-    }
-
-    // if (isSuccess) {
-    //   dispatch(isToken({ token: null }));
-    //   navigate('/login');
-    // }
+    await logOutRTK(token).unwrap();
   };
 
   return (

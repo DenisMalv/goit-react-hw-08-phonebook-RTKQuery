@@ -20,11 +20,15 @@ export const LoginForm = () => {
 
   const handleLoginRTK = async user => {
     try {
-      const ress = await loginRTK(user);
+      // const ress = await loginRTK(user);
+      const ress = await loginRTK({
+        email: 'denismalv@mail.com',
+        password: 'denismalv',
+      });
       if (ress.data) {
-        console.log(isSuccess);
         navigate('/contacts');
         dispatch(isToken({ token: ress.data.token }));
+        localStorage.setItem('tokenhz', ress.data.token);
       }
     } catch (error) {
       isError(error);
@@ -51,6 +55,7 @@ export const LoginForm = () => {
       password,
     };
     await handleLoginRTK(userLogin);
+
     reset();
   };
 

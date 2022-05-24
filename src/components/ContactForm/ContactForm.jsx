@@ -13,6 +13,8 @@ const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const token = useSelector(getToken);
+  // console.log(token);
+  // console.log('render');
 
   const [addContactRTK] = useAddContactRTKMutation();
   const { data = [] } = useGetContactsRTKQuery(token);
