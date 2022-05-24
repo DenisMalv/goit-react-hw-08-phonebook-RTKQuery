@@ -6,15 +6,12 @@ export const AuthApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://connections-api.herokuapp.com',
     prepareHeaders: (headers, { getState }) => {
-      // console.log('login me pls auto');
-      // const token = getState().token.token;
-      const token = localStorage.getItem('tokenhz');
+      console.log('login me pls auto');
+      const token = getState().token.token;
+
       console.log(token);
-      if (token !== 'null') {
-        headers.set(
-          'authorization',
-          `Bearer ${localStorage.getItem('tokenhz')}`
-        );
+      if (token) {
+        headers.set('authorization', `Bearer ${token}`);
       }
       return headers;
     },
